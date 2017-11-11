@@ -832,6 +832,20 @@ NAN_METHOD(Java::newArray) {
     }
   }
 
+  else if(strcmp(className.c_str(), "long") == 0) {
+    results = env->NewLongArray(arrayObj->Length());
+    for(uint32_t i=0; i<arrayObj->Length(); i++) {
+      v8::Local<v8::Value> item = arrayObj->Get(i);
+      jobject val = v8ToJava(env, item);
+      jclass integerClazz = env->FindClass("java/lang/Long");
+      jmethodID integer_intValue = env->GetMethodID(integerClazz, "longValue", "()L");
+      jint intValues[1];
+      intValues[0] = env->CallIntMethod(val, integer_intValue);
+      assertNoException(env);
+      env->SetIntArrayRegion((jintArray)results, i, 1, intValues);
+    }
+  }
+
   else if(strcmp(className.c_str(), "float") == 0) {
     results = env->NewFloatArray(arrayObj->Length());
     for(uint32_t i=0; i<arrayObj->Length(); i++) {
