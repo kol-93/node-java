@@ -838,7 +838,7 @@ NAN_METHOD(Java::newArray) {
       v8::Local<v8::Value> item = arrayObj->Get(i);
       jobject val = v8ToJava(env, item);
       jclass integerClazz = env->FindClass("java/lang/Long");
-      jmethodID integer_intValue = env->GetMethodID(integerClazz, "longValue", "()L");
+      jmethodID integer_intValue = env->GetMethodID(integerClazz, "longValue", "()J");
       jint intValues[1];
       intValues[0] = env->CallIntMethod(val, integer_intValue);
       assertNoException(env);
