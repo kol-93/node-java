@@ -842,7 +842,7 @@ NAN_METHOD(Java::newArray) {
       jlong intValues[1];
       intValues[0] = env->CallIntMethod(val, integer_intValue);
       assertNoException(env);
-      env->SetIntArrayRegion((jintArray)results, i, 1, intValues);
+      env->SetLongArrayRegion((jlongArray)results, i, 1, intValues);
     }
   }
 
