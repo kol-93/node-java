@@ -840,7 +840,7 @@ NAN_METHOD(Java::newArray) {
       jclass integerClazz = env->FindClass("java/lang/Long");
       jmethodID integer_intValue = env->GetMethodID(integerClazz, "longValue", "()J");
       jlong intValues[1];
-      intValues[0] = env->CallIntMethod(val, integer_intValue);
+      intValues[0] = env->CallLongMethod(val, integer_intValue);
       assertNoException(env);
       env->SetLongArrayRegion((jlongArray)results, i, 1, intValues);
     }
